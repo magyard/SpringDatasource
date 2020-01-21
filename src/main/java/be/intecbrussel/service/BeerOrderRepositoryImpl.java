@@ -1,64 +1,32 @@
 package be.intecbrussel.service;
 
 import be.intecbrussel.model.BeerOrder;
-import org.hibernate.criterion.Order;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
+import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceContext;
+
 
 @Repository("beerorderrepository")
 public class BeerOrderRepositoryImpl implements BeerOrderRepository {
 
-    private EntityManagerFactory emf;
+    private EntityManager em;
 
-    @Autowired
-    public void setEmf(EntityManagerFactory emf) {
-        this.emf = emf;
+    @PersistenceContext
+    public void setEmf(EntityManager em) {
+        this.em = em;
     }
 
+    @Transactional
     public int saveOrder(BeerOrder beerOrder)  {
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction txn = em.getTransaction();
-        try {
-
-            em.persist(beerOrder);
-
-            txn.begin();
-            txn.commit();
-
-        }
-        catch (Exception e) {
-            txn.rollback();
-            throw e;
-        }
-        finally {
-            if (em != null) em.close();
-        }
-
+        em.persist(beerOrder);
         return beerOrder.getId();
     }
 
+    @Transactional
     public BeerOrder getBeerOrderById(int id) {
-
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction txn = em.getTransaction();
-        try{
             BeerOrder order = em.find(BeerOrder.class, id);
-
-            txn.begin();
-            txn.commit();
-
             return order;
-        }
-        catch(Exception e) {
-            txn.rollback();
-            throw e;
-        }
-        finally {
-            if (em != null) em.close();
-        }
+
     }
 }

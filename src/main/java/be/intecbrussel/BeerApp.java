@@ -20,14 +20,16 @@ public class BeerApp {
         BeerRepositoryImpl beerRepository = context.getBean("beerRepository", BeerRepositoryImpl.class);
 
 
+        /*
         Beer beer = new Beer();
         beer.setId(4);
         beer.setName("TheNewComer");
 
         beerRepository.updateBeer(beer);
+        */
 
         /*
-        List<Beer> list = beerRepository.getBeerByAlchol(0);
+        List<Beer> list = beerRepository.getBeerByAlcohol(0);
         list.forEach(b -> System.out.println(b.getName()));
         */
 
@@ -43,11 +45,11 @@ public class BeerApp {
 
 
 
-        /*
+
         BeerOrderRepository beerOrderRepository = context.getBean("beerorderrepository", BeerOrderRepository.class);
-        BeerOrder beerOrder = beerOrderRepository.getBeerOrderById(2);
+        BeerOrder beerOrder = beerOrderRepository.getBeerOrderById(3);
         System.out.println(beerOrder.getName());
-        */
+
 
 
 
