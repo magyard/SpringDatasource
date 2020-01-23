@@ -1,5 +1,7 @@
 package be.intecbrussel;
 
+import be.intecbrussel.exceptions.InvalidBeerException;
+import be.intecbrussel.exceptions.InvalidNumberException;
 import be.intecbrussel.model.Beer;
 import be.intecbrussel.model.BeerOrder;
 import be.intecbrussel.service.BeerOrderRepository;
@@ -50,8 +52,14 @@ public class BeerApp {
         System.out.println(beerOrder.getName());
         */
 
-        BeerServiceImpl beerService = context.getBean("beerServiceImpl", BeerServiceImpl.class);
-        beerService.orderBeer("Pieter van den Hoogenband", 16, 2);
+        try {
+            BeerServiceImpl beerService = context.getBean("beerServiceImpl", BeerServiceImpl.class);
+            beerService.orderBeers("Ronald Visser", new int[][]{{31, 32, 34}, {7, 3, -1}});
+        } catch (InvalidBeerException | InvalidNumberException e) {
+            System.out.println(e.getMessage());
+        }
+
+
 
     }
 
