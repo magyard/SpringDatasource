@@ -13,6 +13,7 @@ public class BeerOrderItem {
     @JoinColumn(name="BeerId")
     private Beer beer;
 
+    //this is supposed to be the quantity
     @Column(name="Number")
     private int number;
 

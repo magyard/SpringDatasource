@@ -11,6 +11,7 @@ public class BeerOrder {
     @Column(name = "Id")
     private int id;
 
+    //name of the client
     @Column(name = "Name")
     private String name;
 
