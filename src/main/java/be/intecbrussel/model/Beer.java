@@ -7,6 +7,7 @@ import java.io.Serializable;
 @Table(name = "beers")
 public class Beer implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private int id;
 

@@ -27,6 +27,7 @@ public class BeerServiceImpl implements BeerService {
         this.beerOrderRepository = beerOrderRepository;
     }
 
+    //making an order based on the client's name, beer id, and the desired quantity of this very beer
     public int orderBeer(String name, int beerId, int number) {
         //finding a beer based on the id
         Beer beer = em.find(Beer.class, beerId);
@@ -36,14 +37,17 @@ public class BeerServiceImpl implements BeerService {
         beerOrderItem.setBeer(beer);
         beerOrderItem.setNumber(number);
 
-        //a list of items
+        //a list containing a single item
         List<BeerOrderItem> listOfBeerItems = new ArrayList<>();
         listOfBeerItems.add(beerOrderItem);
+        //no method provided in the repository to save an order item
+        //order item is saved nonetheless thanks to the cascading style in the BeerOrder entity
 
         //making an order
         BeerOrder beerOrder = new BeerOrder();
         beerOrder.setName(name);
         beerOrder.setItems(listOfBeerItems);
+        beerOrderRepository.saveOrder(beerOrder);
 
         return beerOrder.getId();
 

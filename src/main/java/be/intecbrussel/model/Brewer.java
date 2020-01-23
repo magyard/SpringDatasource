@@ -9,6 +9,7 @@ import java.util.Set;
 @Table(name="brewers")
 public class Brewer implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="Id")
     private int id;
 

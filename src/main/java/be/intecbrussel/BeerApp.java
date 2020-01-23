@@ -5,6 +5,7 @@ import be.intecbrussel.model.BeerOrder;
 import be.intecbrussel.service.BeerOrderRepository;
 import be.intecbrussel.service.BeerRepository;
 import be.intecbrussel.service.BeerRepositoryImpl;
+import be.intecbrussel.service.BeerServiceImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -17,12 +18,11 @@ public class BeerApp {
         ConfigurableApplicationContext context = SpringApplication.run(BeerApp.class, args);
 
 
-        BeerRepositoryImpl beerRepository = context.getBean("beerRepository", BeerRepositoryImpl.class);
+        //BeerRepositoryImpl beerRepository = context.getBean("beerRepository", BeerRepositoryImpl.class);
 
 
         /*
         Beer beer = new Beer();
-        beer.setId(4);
         beer.setName("TheNewComer");
 
         beerRepository.updateBeer(beer);
@@ -38,20 +38,20 @@ public class BeerApp {
         BeerOrderRepository beerOrderRepository = context.getBean("beerorderrepository", BeerOrderRepository.class);
         //cannot use context.getBean() to create a BeerOrder instance. BeerOrder is an entity but not a bean
         BeerOrder beerOrder1 = new BeerOrder();
-        beerOrder1.setId(3);
         beerOrder1.setName("Femke van Hoogstaal");
         beerOrderRepository.saveOrder(beerOrder1);
         */
 
 
 
-
+        /*
         BeerOrderRepository beerOrderRepository = context.getBean("beerorderrepository", BeerOrderRepository.class);
         BeerOrder beerOrder = beerOrderRepository.getBeerOrderById(3);
         System.out.println(beerOrder.getName());
+        */
 
-
-
+        BeerServiceImpl beerService = context.getBean("beerServiceImpl", BeerServiceImpl.class);
+        beerService.orderBeer("Pieter van den Hoogenband", 16, 2);
 
     }
 
